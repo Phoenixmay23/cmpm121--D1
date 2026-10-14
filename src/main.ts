@@ -257,7 +257,7 @@ const upgradeRows = upgrades.map((upgrade) => {
 // ---- Display: one place keeps the page in sync with the state ----
 function updateDisplay(): void {
   counterDisplay.textContent = `${Math.floor(counter)} Gems`;
-  rateDisplay.textContent = `${growthRate()} Gems per second`;
+  rateDisplay.textContent = `Growth Rate: ${growthRate()} Gems/sec`;
 
   upgrades.forEach((upgrade, i) => {
     const { row, button, label, info } = upgradeRows[i];
@@ -295,25 +295,12 @@ function tick(now: number): void {
 
   counter += growthRate() * elapsedSeconds;
   updateDisplay();
-  updateClick();
-  updateGrowthDisplay();
 
   requestAnimationFrame(tick);
 }
 
 requestAnimationFrame(tick);
 
-// Reset button
-const resetButton = document.createElement("button");
-resetButton.id = "reset-button";
-resetButton.textContent = "Reset";
-app.append(resetButton);
-
-resetButton.addEventListener("click", () => {
-  counter = 0;
-  growthRate = 1;
-  updateDisplay();
-  updateGrowthDisplay();
 // Credits at the bottom of the page
 const credits = document.createElement("footer");
 credits.className = "credits";
@@ -336,12 +323,3 @@ clickButton.addEventListener("click", () => {
   floatText(coinArea, "+1");
   updateDisplay();
 });
-
-const GrowthCounter = document.createElement("p");
-
-function updateGrowthDisplay() {
-  GrowthCounter.textContent = `Growth Rate: ${growthRate} Golds/sec`;
-}
-
-updateGrowthDisplay();
-document.body.appendChild(GrowthCounter);
