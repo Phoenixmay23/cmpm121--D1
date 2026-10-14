@@ -114,7 +114,7 @@ function tick(now: number) {
   counter += growthRate * elapsedSeconds;
   updateDisplay();
   updateClick();
-
+  updateGrowthDisplay();
   requestAnimationFrame(tick);
 }
 
@@ -130,6 +130,7 @@ resetButton.addEventListener("click", () => {
   counter = 0;
   growthRate = 1;
   updateDisplay();
+  updateGrowthDisplay();
 });
 
 // Click adds to the counter
@@ -137,3 +138,12 @@ clickButton.addEventListener("click", () => {
   counter += 1;
   updateDisplay();
 });
+
+const GrowthCounter = document.createElement("p");
+
+function updateGrowthDisplay() {
+  GrowthCounter.textContent = `Growth Rate: ${growthRate} Golds/sec`;
+}
+
+updateGrowthDisplay();
+document.body.appendChild(GrowthCounter);
