@@ -2,6 +2,7 @@
 // even this tiny example demonstrates a separately deployed asset.
 // @deno-types="./asset-url.d.ts"
 import tileUrl from "./assets/tile.svg?no-inline";
+import { ButtonFactory } from "./buttonfactory.ts";
 
 const app = document.querySelector<HTMLElement>("#app")!;
 
@@ -47,6 +48,13 @@ upgradeButton2.textContent = "Even More Money!";
 upgradeButton2.setAttribute("disabled", "true");
 let upgrade2Clicks: number = 200;
 app.append(upgradeButton2);
+
+const myButtonFactory = new ButtonFactory();
+const myNewButton: HTMLButtonElement = myButtonFactory.createButton(
+  "myNewButton",
+  "myNewID",
+);
+app.append(myNewButton);
 
 function updateDisplay() {
   counterDisplay.textContent = `${Math.floor(counter)} Golds`;
